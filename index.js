@@ -8,20 +8,13 @@ app.use(express.static("public"))
 app.use(express.json())
 app.use(express.urlencoded())
 
-const students = [
-	{ id: 1, name: "Frank" },
-	{ id: 2, name: "Moses" },
-	{ id: 3, name: "Marvin" },
-	{ id: 4, name: "Clive Peter" },
-];
-
 
 app.get("/kanzucode/students/:id", (req, res) => {
 	try {
 		const findStudent = students.find((value)=>{
 			if (JSON.stringify(value.id) === req.params.id) {
 				return value;
-			}else {
+			} else {
 				throw new Error("Student not found")
 			}
 		});
