@@ -1,3 +1,41 @@
 {
-  "students": []
+  "students": [
+    {
+      "id": 1,
+      "name": "Cyprian Lukyamuzi",
+      "email": "cyprian@gmail.com",
+      "phone": "0778654327",
+      "password": "$2a$10$Ty1lT/OTBRwdqTdCL83ujeZOIB5xbLKTW85bVgjGai174/bYQea3G",
+      "course": "Javascript Backend",
+      "createdAt": "2023-10-16T18:22:26.054Z",
+      "updatedAt": "2023-10-16T19:17:30.355Z"
+    },
+    {
+      "id": 3,
+      "name": "Jonathan R",
+      "email": "jonathan@gmail.com",
+      "phone": "0778654327",
+      "hashedPassword": "$2a$10$IZOWUeJwFh7AKqFKVy.BkOHSuoKCgJ8H7WQNO.2kVdWV0LDR0J1ou",
+      "course": "Javascript Backend",
+      "createdAt": "2023-10-16T18:27:50.139Z"
+    },
+    {
+      "id": 5,
+      "name": "Otieno Mike",
+      "email": "mike1@gmail.com",
+      "phone": "0778654327",
+      "hashedPassword": "$2a$10$U0jh30yCzqdKt0rQdFSSv.fsuvNVJhggOh2zJHFCvtkyKJY6E48V.",
+      "course": "Javascript Backend",
+      "createdAt": "2023-10-16T19:35:10.640Z"
+    },
+    {
+      "id": 6,
+      "name": "Clive Peter",
+      "email": "peter@gmail.com",
+      "phone": "0778654327",
+      "hashedPassword": "$2a$10$44QVrpnD2JSS2vnMtizD0.JGTcXI21EXNact3YPQg6tOWPyuuIwHS",
+      "course": "Javascript Backend",
+      "createdAt": "2023-10-16T19:37:19.231Z"
+    }
+  ]
 }
