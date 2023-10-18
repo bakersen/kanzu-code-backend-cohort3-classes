@@ -3,7 +3,10 @@ const express = require("express");
 const colors = require("colors");
 const app = express();
 const port = 5000;
-const studentsRoute =  require("./v1/routes/studentsRoute")
+const studentsRoute =  require("./v1/routes/studentsRoute");
+const authRoute = require("./v1/routes/authRoute");
+const verifyToken = require("./middlewares/verifyToken")
+
 
 
 //Middleware
@@ -11,8 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 //Routes
-app.use("/api/v1/students", studentsRoute);
 
+app.use("/api/v1/auth", authRoute);
+
+app.use(verifyToken);
+app.use("/api/v1/students", studentsRoute);
 
 app.use("*", (req, res) => {
 	res.status(404).json({ status: "Endpoint doesn't exist" });

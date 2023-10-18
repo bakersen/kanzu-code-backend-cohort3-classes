@@ -5,7 +5,7 @@
       "name": "Cyprian Lukyamuzi",
       "email": "cyprian@gmail.com",
       "phone": "0778654327",
-      "password": "$2a$10$Ty1lT/OTBRwdqTdCL83ujeZOIB5xbLKTW85bVgjGai174/bYQea3G",
+      "hashedPassword": "$2a$10$Ty1lT/OTBRwdqTdCL83ujeZOIB5xbLKTW85bVgjGai174/bYQea3G",
       "course": "Javascript Backend",
       "createdAt": "2023-10-16T18:22:26.054Z",
       "updatedAt": "2023-10-16T19:17:30.355Z"
@@ -36,6 +36,15 @@
       "hashedPassword": "$2a$10$44QVrpnD2JSS2vnMtizD0.JGTcXI21EXNact3YPQg6tOWPyuuIwHS",
       "course": "Javascript Backend",
       "createdAt": "2023-10-16T19:37:19.231Z"
+    },
+    {
+      "id": 7,
+      "name": "Marvin",
+      "email": "marvin@gmail.com",
+      "phone": "0776786545",
+      "hashedPassword": "$2a$10$GZL/ZHnIS7KD8MvECMdh9OQQxXeBAtqPkX1S.8MFSAT..mJO3J1mK",
+      "course": "DevOps",
+      "createdAt": "2023-10-18T18:10:52.676Z"
     }
   ]
 }
