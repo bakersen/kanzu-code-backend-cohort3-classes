@@ -3,6 +3,7 @@ const db = require("../database/db.json");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
 
+//Login
 const login = async (req, res) => {
 	const { email, hashedPassword } = req.body;
 
