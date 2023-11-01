@@ -15,7 +15,6 @@ model Student {
   name      String   @db.VarChar(50)
   email     String   @db.VarChar(50) @unique
   phone     String   @db.VarChar(50)
-  course    String   @db.VarChar(50)
   password  String   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
