@@ -1,10 +1,26 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcrypt = require("bcryptjs");
+const { studentValidation } = require("../../lib/validations");
 
 const getAllStudents = async (req, res) => {
 	try {
-		const students = await prisma.student.findMany();
+		const students = await prisma.student.findMany({
+			include: {
+				profile: {
+					select: {
+						name: true,
+						email: true,
+						phone: true,
+					},
+				},
+				course: {
+					select: {
+						course_name: true,
+					},
+				},
+			},
+		});
 		res.status(200).json({ status: 200, data: students });
 	} catch (err) {
 		console.log(err);
@@ -17,6 +33,15 @@ const getOneStudents = async (req, res) => {
 		const id = parseInt(req.params.id);
 		const userExists = await prisma.student.findUnique({
 			where: { id },
+			include: {
+				course: {
+					select: {
+						course_name: true,
+						id: true,
+					},
+				},
+				profile: true,
+			},
 		});
 
 		if (!userExists) {
@@ -31,15 +56,14 @@ const getOneStudents = async (req, res) => {
 
 const createStudent = async (req, res) => {
 	try {
-		const { name, email, phone, password, course } = req.body;
+		const { name, email, phone, password, courseId } = req.body;
 		//Check data is valid
 
-		if (!name || !email || !phone || !password || !course) {
-			return res.status(400).json({ status: 400, msg: "Missing or empty fields" });
-		}
+		const { error } = studentValidation(req.body);
+		if (error) return res.status(400).json({ message: error.details[0].message });
 
 		//Check if user doesn't exist
-		const userExists = await prisma.student.findUnique({ where: { email } });
+		const userExists = await prisma.profile.findUnique({ where: { email } });
 
 		if (userExists) {
 			return res.status(400).json({ status: 400, msg: "Record exists already" });
@@ -51,11 +75,17 @@ const createStudent = async (req, res) => {
 
 		const newUser = await prisma.student.create({
 			data: {
-				name: name.trim(),
-				email: email.trim(),
-				phone: phone.trim(),
-				password: hashedPassword,
-				course: course.trim(),
+				profile: {
+					create: {
+						name: name.trim(),
+						email: email.trim(),
+						phone: phone.trim(),
+						password: hashedPassword,
+					},
+				},
+				course: {
+					connect: { id: parseInt(courseId) },
+				},
 			},
 		});
 		res.status(201).json({ status: 201, data: newUser });

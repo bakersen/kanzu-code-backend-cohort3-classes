@@ -10,12 +10,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Profile {
+  id           Int        @id @default(autoincrement())
+  name         String     @db.VarChar(50)
+  email        String     @unique @db.VarChar(50)
+  phone        String     @db.VarChar(50)
+  password     String     @db.VarChar(255)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  role         Role       @default(user)
+  studentid    Int?        @unique
+  student      Student?   @relation(fields: [studentid], references: [id])
+  instructorid Int?        @unique
+  instructor   Instructor? @relation(fields: [instructorid], references: [id])
+}
+
+enum Role {
+  admin
+  user
+}
+
 model Student {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(50)
-  email     String   @db.VarChar(50) @unique
-  phone     String   @db.VarChar(50)
-  password  String   @db.VarChar(255)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id       Int      @id @default(autoincrement())
+  profile  Profile?
+  courseid Int?     
+  course   Course?   @relation(fields: [courseid], references: [id])
+}
+
+model Instructor {
+  id      Int      @id @default(autoincrement())
+  profile Profile?
+  courses Course[]
+}
+
+model Course {
+  id               Int          @id @default(autoincrement())
+  course_name      String       @db.VarChar(50)
+  mode_of_delivery DeliveryMode @default(online)
+  course_tuition   Int
+  students         Student[]
+  instructors      Instructor[]
+}
+
+enum DeliveryMode {
+  online
+  hybrid
+  physical
 }
